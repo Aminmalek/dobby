@@ -3,7 +3,7 @@ from api_client import APIClient
 from kafka_producer import KafkaProducerWrapper
 from config import API_URL, KAFKA_BROKER, KAFKA_TOPIC
 
-class KafkaProducerService:
+class App:
     def __init__(self):
         self.api_client = APIClient(API_URL)
         self.kafka_producer = KafkaProducerWrapper(KAFKA_BROKER, KAFKA_TOPIC)
@@ -17,5 +17,5 @@ class KafkaProducerService:
 
 if __name__ == "__main__":
     print("Starting Kafka Producer Service...")
-    service = KafkaProducerService()
+    service = App()
     service.run()
