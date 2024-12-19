@@ -18,9 +18,11 @@ down:
 
 log:
 	@docker compose logs -f app
+
 run-tests:
 	@echo '\n'------------- [run tests] -------------
 	@docker compose exec fastapi_service python3 -m pytest
+
 create-kafka-topic:
 	@echo '\n'------------- [create kafka topic] -------------
 	@docker compose exec kafka kafka-topics.sh --create --bootstrap-server localhost:9092 --topic texts_topic --partitions 1 --replication-factor 1 --if-not-exists
