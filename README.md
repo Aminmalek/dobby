@@ -117,9 +117,7 @@ By using a microservices architecture, this system is robust, scalable, and easy
 - **FastAPI**: Provides an HTTP API for interacting with Elasticsearch, including search and tagging features.
 
 ## Project Structure
-![](https://drive.google.com/file/d/1RN3_QBH1vO4Po8fx6ADT7v-PJM-30pPL/view?usp=drive_link)
-
-
+Click [here](https://drive.google.com/file/d/1RN3_QBH1vO4Po8fx6ADT7v-PJM-30pPL/preview) to see the project structure.
 ## Services
 
 ### 1. Kafka Producer Daemon Service
