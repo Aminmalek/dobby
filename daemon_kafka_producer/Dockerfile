@@ -10,5 +10,5 @@ COPY create_topic.sh /usr/local/bin/create_topic.sh
 RUN chmod +x /usr/local/bin/create_topic.sh
 
 # Ensure the script runs before your application starts
-CMD /usr/local/bin/wait-for-kafka.sh && python producer.py
+CMD /usr/local/bin/wait-for-kafka.sh && python app.py
 
