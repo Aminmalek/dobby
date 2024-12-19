@@ -9,7 +9,7 @@ This project consists of three services and kafka ui:
 2. **Kafka Consumer Daemon**: A service that reads the data from the Kafka topic, processes it, and stores the data into an Elasticsearch index with the specified schema.
 
 3. **FastAPI Service**: A web service that provides APIs for searching and tagging the content stored in Elasticsearch. The search allows users to filter content by any field, and the tagging feature allows tagging content with predefined static tags.
-4. **Kafka UI** : a kafka ui for easy use of kafka
+4. **Kafka UI** : a kafka ui for easy use of kafka run on `http://localhost:8080`
 
 ## Requirements
 
@@ -96,7 +96,7 @@ make create-kafka-topic
 
 This command will create a Kafka topic named `texts_topic` with 1 partition and a replication factor of 1, if it doesn't already exist.
 
-## Additional Commands
+## All Commands
 The following are the targets available in the `Makefile`:
 
 - **docker**: Builds the Docker images for the project.
@@ -114,7 +114,7 @@ If you encounter issues with Docker or the services, check the following:
 - Ensure Docker is running and properly configured.
 - Check logs with `make log` to diagnose issues with the application.
 - If the containers are not starting, try `make down` and then `make run` to reset the environment.
-# Dobby Project Architecture Overview
+# Architecture Overview
 
 This project follows a **microservices** architecture with a focus on modularity, scalability, and maintainability. The key components of the system are as follows:
 
@@ -122,7 +122,7 @@ This project follows a **microservices** architecture with a focus on modularity
 - **Purpose**: Consumes data from a Kafka topic and stores it in Elasticsearch.
 - **Components**:
   - `config.py`: Contains configuration settings, such as connection details for Kafka and Elasticsearch.
-  - `consumer.py`: The core logic for consuming messages from Kafka and processing them.
+  - `app.py`: The core logic for consuming messages from Kafka and processing them.
   - `elastic_client.py`: Handles interactions with the Elasticsearch service.
   - `kafka_consumer.py`: Manages the Kafka consumer setup and connection.
   - `Dockerfile`: Containerizes the consumer service for deployment.
@@ -138,7 +138,7 @@ This project follows a **microservices** architecture with a focus on modularity
   - `api_client.py`: Fetches data from an external API.
   - `config.py`: Configuration for Kafka and external API connections.
   - `kafka_producer.py`: Sends data to Kafka topics.
-  - `producer.py`: Orchestrates fetching data and publishing it to Kafka.
+  - `pp.py`: Orchestrates fetching data and publishing it to Kafka.
   - `Dockerfile`: Containerizes the producer service for deployment.
   - `requirements.txt`: Lists dependencies for the producer service (Kafka client and external API libraries).
 
@@ -284,6 +284,7 @@ Updates the Tag field of a document in Elasticsearch.
 ### How Verify the services are running?:
 
 #### Kafka: Should be running on port 9093.
+#### Kafka UI : Should be accessible at  http://localhost:8080.
 #### Elasticsearch: Should be accessible at http://localhost:9200.
 #### FastAPI: Should be accessible at http://localhost:8000.
 Access FastAPI APIs:
