@@ -190,11 +190,11 @@ Updates the Tag field of a document in Elasticsearch.
 #### FastAPI: Should be accessible at http://localhost:8000.
 Access FastAPI APIs:
 
-Search API: GET http://localhost:8000/api/search/?field=title&value=some_value
-Tagging API: POST http://localhost:8000/api/tag/
+- **Search API: GET http://localhost:8000/api/search/?field=title&value=some_value**
+- **Tagging API: POST http://localhost:8000/api/tag/**
+
 Payload:
-json
-Copy code
+```json
 {
   "doc_id": "document_id",
   "tag": 1
