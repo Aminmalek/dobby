@@ -11,22 +11,15 @@ This project consists of three services and kafka ui:
 3. **FastAPI Service**: A web service that provides APIs for searching and tagging the content stored in Elasticsearch. The search allows users to filter content by any field, and the tagging feature allows tagging content with predefined static tags.
 4. **Kafka UI** : a kafka ui for easy use of kafka
 
-## Prerequisites
+## Requirements
 
-1. **Docker**: Make sure Docker is installed and running on your machine.
-2. **Docker Compose**: You will need Docker Compose to orchestrate the services.
+Before you begin, ensure you have the following installed:
 
-# Dobby Project
-
+- Docker
+- Docker Compose
+- Make (optional, for running Makefile commands)
 ## Overview
 This project is a FastAPI-based service with Docker, Kafka, and other necessary configurations to run and test. This document outlines how to build, run, and interact with the project using the provided `Makefile`.
-
-## Prerequisites
-Before you begin, make sure you have the following installed on your system:
-
-- Docker (with Docker Compose)
-- Make (optional, but required for running the Makefile commands)
-- Python 3 (for running tests if needed)
 
 ## Setup
 
