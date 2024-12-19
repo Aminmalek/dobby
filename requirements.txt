@@ -1,0 +1,8 @@
+# Common Dependencies
+requests
+python_kafka
+elasticsearch==8.9.0
+
+# FastAPI Dependencies
+fastapi
+uvicorn

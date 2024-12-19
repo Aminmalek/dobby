@@ -1,0 +1,91 @@
+version: "3.8"
+
+services:
+  kafka:
+    image: bitnami/kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+      - kafka-net
+    restart: always
+
+  kafka-ui:
+      image: provectuslabs/kafka-ui:latest
+      container_name: kafka-ui
+      ports:
+        - "8080:8080"
+      environment:
+        KAFKA_CLUSTERS_0_NAME: local
+        KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      depends_on:
+        - kafka
+      networks:
+        - kafka-net
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ALLOW_ANONYMOUS_LOGIN: yes
+    ports:
+      - "2181:2181"
+    networks:
+      - kafka-net
+    restart: always
+
+  elasticsearch:
+    image: elasticsearch:8.9.0
+    environment:
+      - discovery.type=single-node
+      - cluster.name=my-cluster
+      - network.host=0.0.0.0
+      - http.port=9200
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - kafka-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=30s"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+  producer_service:
+    build: ./daemon_kafka_producer
+    networks:
+      - kafka-net
+    depends_on:
+      - kafka
+
+  consumer_service:
+    build: ./daemon_kafka_consumer
+    networks:
+        - kafka-net
+    depends_on:
+      - kafka
+      - elasticsearch
+    restart: always
+
+  fastapi_service:
+   build: ./fastapi_service
+   depends_on:
+     - elasticsearch
+   ports:
+     - "8000:8000"
+   networks:
+     - kafka-net
+  # Mount the code directory to the container
+networks:
+  kafka-net:
+    driver: bridge
