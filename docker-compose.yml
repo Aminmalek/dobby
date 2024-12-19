@@ -16,6 +16,10 @@ services:
     networks:
       - kafka-net
     restart: always
+    command: >
+        bash -c "
+          kafka-topics.sh --create --bootstrap-server localhost:9092 --topic texts_topic --partitions 1 --replication-factor 1 --if-not-exists;
+          tail -f /dev/null"
 
   kafka-ui:
       image: provectuslabs/kafka-ui:latest
@@ -29,6 +33,7 @@ services:
         - kafka
       networks:
         - kafka-net
+
   zookeeper:
     image: bitnami/zookeeper:latest
     environment:
