@@ -16,6 +16,111 @@ This project consists of three services and kafka ui:
 1. **Docker**: Make sure Docker is installed and running on your machine.
 2. **Docker Compose**: You will need Docker Compose to orchestrate the services.
 
+# Dobby Project
+
+## Overview
+This project is a FastAPI-based service with Docker, Kafka, and other necessary configurations to run and test. This document outlines how to build, run, and interact with the project using the provided `Makefile`.
+
+## Prerequisites
+Before you begin, make sure you have the following installed on your system:
+
+- Docker (with Docker Compose)
+- Make (optional, but required for running the Makefile commands)
+- Python 3 (for running tests if needed)
+
+## Setup
+
+Clone this repository to your local machine:
+
+```bash
+git clone <repository-url>
+cd dobby
+```
+
+### Docker Setup
+The project uses Docker for containerization. Ensure Docker is running on your system.
+
+## Usage
+
+### Build Docker Images
+To build the Docker images for the project, run the following command:
+
+```bash
+make
+```
+
+This will build the Docker images specified in the `docker-compose.yml` file. It uses the `DOCKER_DEFAULT_PLATFORM=linux/amd64` environment variable to ensure compatibility across systems.
+
+### Run Docker Containers
+To start the application and related services, use:
+
+```bash
+make run
+```
+
+This command starts the Docker containers as defined in the `docker-compose.yml` file. The application will be accessible according to the settings in your Docker Compose file.
+
+### Restart Containers
+If you need to restart the containers, use:
+
+```bash
+make restart
+```
+
+This will restart the running containers.
+
+### Bring Down Containers
+To stop and remove all containers, networks, and volumes defined in your `docker-compose.yml` file:
+
+```bash
+make down
+```
+
+### View Logs
+To view the logs of the application container, run:
+
+```bash
+make log
+```
+
+This will display the logs of the `app` container in real-time.
+
+### Run Tests
+To run tests inside the FastAPI service container, use:
+
+```bash
+make run-tests
+```
+
+This will execute the tests using `pytest` inside the FastAPI service container.
+
+### Create Kafka Topic
+To create a Kafka topic (`texts_topic`), use:
+
+```bash
+make create-kafka-topic
+```
+
+This command will create a Kafka topic named `texts_topic` with 1 partition and a replication factor of 1, if it doesn't already exist.
+
+## Additional Commands
+The following are the targets available in the `Makefile`:
+
+- **docker**: Builds the Docker images for the project.
+- **run**: Starts the Docker containers defined in `docker-compose.yml`.
+- **restart**: Restarts the Docker containers.
+- **down**: Stops and removes all containers, networks, and volumes.
+- **log**: Shows real-time logs for the app container.
+- **run-tests**: Runs tests inside the FastAPI service container.
+- **create-kafka-topic**: Creates the Kafka topic `texts_topic`.
+
+## Troubleshooting
+
+If you encounter issues with Docker or the services, check the following:
+
+- Ensure Docker is running and properly configured.
+- Check logs with `make log` to diagnose issues with the application.
+- If the containers are not starting, try `make down` and then `make run` to reset the environment.
 # Dobby Project Architecture Overview
 
 This project follows a **microservices** architecture with a focus on modularity, scalability, and maintainability. The key components of the system are as follows:
