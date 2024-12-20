@@ -1,6 +1,7 @@
-# Dobby Project
-![a character in harry potter movie](https://domnardireviews.wordpress.com/wp-content/uploads/2015/05/1294516396126_f.jpg)
-## Project Overview
+# Dobby Project for Dataak task
+<div align="center">
+    <img src="https://i.ibb.co/QCZRSZ3/DALL-E-2024-12-20-18-04-51-An-original-illustration-of-a-tech-inspired-house-elf-character-designed.webp" alt="A character in Harry Potter movie" width="300" height="300">
+</div>
 
 This project consists of three services and kafka ui:
 
